@@ -31,7 +31,9 @@ class Login extends StatefulWidget {
   Login({Key key}) : super(key: key);
 
   @override
-  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+  _MyStatefulWidgetState createState() {
+    return _MyStatefulWidgetState();
+  }
 }
 
 /// This is the private State class that goes with MyStatefulWidget.
@@ -42,9 +44,10 @@ class _MyStatefulWidgetState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign in Form'),
+        title: Text('Login Form'),
       ),
       body: Form(
+        key: _formKey,
         child: Scrollbar(
           child: SingleChildScrollView(
             padding: EdgeInsets.all(16),
@@ -116,7 +119,7 @@ class _MyStatefulWidgetState extends State<Login> {
                   //   },
                   // ),
                 ].expand(
-                  (widget) => [
+                      (widget) => [
                     widget,
                     SizedBox(
                       height: 24,

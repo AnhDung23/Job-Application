@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 
 /// This is the main application widget.
 class MyApp extends StatelessWidget {
-  static const String _title = 'Login';
+  static const String _title = 'Signup';
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,9 @@ class Signup extends StatefulWidget {
   Signup({Key key}) : super(key: key);
 
   @override
-  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+  _MyStatefulWidgetState createState() {
+    return _MyStatefulWidgetState();
+  }
 }
 
 /// This is the private State class that goes with MyStatefulWidget.
@@ -42,9 +44,10 @@ class _MyStatefulWidgetState extends State<Signup> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign in Form'),
+        title: Text('Signup Form'),
       ),
       body: Form(
+        key: _formKey,
         child: Scrollbar(
           child: SingleChildScrollView(
             padding: EdgeInsets.all(16),
