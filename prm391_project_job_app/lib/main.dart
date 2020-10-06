@@ -1,7 +1,61 @@
 import 'package:flutter/material.dart';
 
+import 'login.dart';
+import 'signup.dart';
+
 void main() {
   runApp(MyApp());
+}
+
+final demos = [
+  Demo(
+    name: 'Login',
+    route: '/login',
+    builder: (context) => Login(),
+  ),
+  Demo(
+    name: 'Signup',
+    route: '/signup',
+    builder: (context) => Signup(),
+  ),
+];
+
+class Demo {
+  final String name;
+  final String route;
+  final WidgetBuilder builder;
+
+  const Demo({this.name, this.route, this.builder});
+}
+
+class DemoTile extends StatelessWidget {
+  final Demo demo;
+
+  DemoTile(this.demo);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(demo.name),
+      onTap: () {
+        Navigator.pushNamed(context, demo.route);
+      },
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Form Samples'),
+      ),
+      body: ListView(
+        children: [...demos.map((d) => DemoTile(d))],
+      ),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -26,7 +80,9 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: Map.fromEntries(demos.map((d) => MapEntry(d.route, d.builder))),
+      home: HomePage(),
     );
   }
 }
