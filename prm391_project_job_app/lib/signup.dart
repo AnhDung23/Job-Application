@@ -39,6 +39,16 @@ class Signup extends StatefulWidget {
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<Signup> {
   final _formKey = GlobalKey<FormState>();
+  final email = TextEditingController();
+  final fullname = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    email.dispose();
+    fullname.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +65,7 @@ class _MyStatefulWidgetState extends State<Signup> {
               children: [
                 ...[
                   TextFormField(
+                    controller: fullname,
                     decoration: InputDecoration(
                       filled: true,
                       hintText: 'Your Fullname',
@@ -71,6 +82,7 @@ class _MyStatefulWidgetState extends State<Signup> {
                     },
                   ),
                   TextFormField(
+                    controller: email,
                     decoration: InputDecoration(
                       filled: true,
                       hintText: 'Your email address',
@@ -124,7 +136,16 @@ class _MyStatefulWidgetState extends State<Signup> {
                       if (_formKey.currentState.validate()) {
                         // If the form is valid, display a snackbar. In the real world,
                         // you'd often call a server or save the information in a database.
-
+                        return showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              // Retrieve the text the user has entered by using the
+                              // TextEditingController.
+                              content: Text(fullname.text + "\n" + email.text),
+                            );
+                          },
+                        );
                         Scaffold.of(context).showSnackBar(
                             SnackBar(content: Text('Processing Data')));
                       }

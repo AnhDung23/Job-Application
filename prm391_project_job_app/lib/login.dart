@@ -39,6 +39,16 @@ class Login extends StatefulWidget {
 /// This is the private State class that goes with MyStatefulWidget.
 class _MyStatefulWidgetState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
+  final email = TextEditingController();
+  final password = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    email.dispose();
+    password.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +65,7 @@ class _MyStatefulWidgetState extends State<Login> {
               children: [
                 ...[
                   TextFormField(
+                    controller: email,
                     decoration: InputDecoration(
                       filled: true,
                       hintText: 'Your email address',
@@ -71,6 +82,7 @@ class _MyStatefulWidgetState extends State<Login> {
                     },
                   ),
                   TextFormField(
+                    controller: password,
                     decoration: InputDecoration(
                       filled: true,
                       labelText: 'Password',
@@ -92,9 +104,29 @@ class _MyStatefulWidgetState extends State<Login> {
                       if (_formKey.currentState.validate()) {
                         // If the form is valid, display a snackbar. In the real world,
                         // you'd often call a server or save the information in a database.
-
+                        return showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              // Retrieve the text the user has entered by using the
+                              // TextEditingController.
+                              content: Text(email.text),
+                            );
+                          },
+                        );
                         Scaffold.of(context).showSnackBar(
                             SnackBar(content: Text('Processing Data')));
+                      } else {
+                        // return showDialog(
+                        //   context: context,
+                        //   builder: (context) {
+                        //     return AlertDialog(
+                        //       // Retrieve the text the user has entered by using the
+                        //       // TextEditingController.
+                        //       content: Text(email.text),
+                        //     );
+                        //   },
+                        // );
                       }
                     },
                     child: Text('Login'),
@@ -119,7 +151,7 @@ class _MyStatefulWidgetState extends State<Login> {
                   //   },
                   // ),
                 ].expand(
-                      (widget) => [
+                  (widget) => [
                     widget,
                     SizedBox(
                       height: 24,
