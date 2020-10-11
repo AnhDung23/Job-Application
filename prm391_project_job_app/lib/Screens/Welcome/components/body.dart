@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:prm391_project_job_app/Screens/Home/home_screen.dart';
 import 'package:prm391_project_job_app/Screens/Login/login_screen.dart';
 import 'package:prm391_project_job_app/Screens/Signup/signup_screen.dart';
 import 'package:prm391_project_job_app/Screens/Welcome/components/background.dart';
@@ -52,6 +54,17 @@ class Body extends StatelessWidget {
                     },
                   ),
                 );
+              },
+            ),
+            RoundedButton(
+              text: "HOME",
+              textColor: Colors.white,
+              press: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return Home();
+                  },
+                ));
               },
             ),
           ],
